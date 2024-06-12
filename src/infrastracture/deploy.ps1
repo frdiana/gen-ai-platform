@@ -1,0 +1,1 @@
+az deployment group create --resource-group "dev-gen-ai-platform" --template-file "main.bicep" --parameters "main.bicepparam"
