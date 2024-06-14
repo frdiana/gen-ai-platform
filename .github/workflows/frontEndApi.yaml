@@ -43,26 +43,4 @@ jobs:
         containerAppName: ${{ secrets.CONTAINER_APP_NAME }}
         containerAppEnvironment: ${{ secrets.CONTAINER_APP_ENVIRONMENT_NAME }}
         resourceGroup: ${{ secrets.RESOURCE_GROUP }}
-  DeployContainerAppTest:
-     name: Deploy Container App Test (Dev)
-     needs: [BuildAndDeployContainerApp]
-     env:
-      IMAGE_TAG: ${{needs.BuildAndDeployContainerApp.outputs.imageTag}}
-     environment: test
-     runs-on: ubuntu-latest
-     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
-      - name: Azure login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      # Deploy the container app to the test environment using the imageToDeploy from the previous job
-      - name: Container App deploy
-        uses: azure/container-apps-deploy-action@v1
-        with:
-          acrName: ${{ secrets.CONTAINER_REGISTRY_NAME }}
-          imageToDeploy: devaiplatformcr.azurecr.io/dev-ai-platform-api:${{ env.BRANCH_NAME }}-${{ env.IMAGE_TAG }}
-          containerAppName: ${{ secrets.CONTAINER_APP_NAME }}
-          containerAppEnvironment: ${{ secrets.CONTAINER_APP_ENVIRONMENT_NAME }}
-          resourceGroup: ${{ secrets.RESOURCE_GROUP }}
+        targetPort: 8080
