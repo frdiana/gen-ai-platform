@@ -1,0 +1,68 @@
+name: ai-platform-api
+on:
+  push:
+    branches:
+      - main
+  # Add workflow dispatch event to trigger the workflow manually to all 
+  workflow_dispatch: 
+env:
+  DOTNET_CORE_VERSION: 8.0.x
+  DATE: $(date +'%Y%m%d_%H%M')
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+
+jobs:
+  BuildAndDeployContainerApp:
+    name: Build and Deploy Container App (Dev)
+    environment: dev
+    runs-on: ubuntu-latest
+    outputs:
+      imageTag: ${{ steps.current-time.outputs.formattedTime }}
+    steps:
+    - name: Get current time
+      uses: josStorer/get-current-time@v2
+      id: current-time
+      with:
+        format: YYYYMMDDHHMM
+    
+    - name: Checkout source code
+      uses: actions/checkout@v4
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Container App deploy
+      uses: azure/container-apps-deploy-action@v1
+      with:
+        appSourcePath: ${{ github.workspace }}
+        acrName: ${{ secrets.CONTAINER_REGISTRY_NAME }}
+        imageToBuild: ${{ secrets.CONTAINER_REGISTRY_LOGIN_SERVER }}/${{ secrets.CONTAINER_APP_NAME }}:${{ env.BRANCH_NAME }}-${{ steps.current-time.outputs.formattedTime  }}
+        containerAppName: ${{ secrets.CONTAINER_APP_NAME }}
+        containerAppEnvironment: ${{ secrets.CONTAINER_APP_ENVIRONMENT_NAME }}
+        resourceGroup: ${{ secrets.RESOURCE_GROUP }}
+  DeployContainerAppTest:
+     name: Deploy Container App Test (Dev)
+     needs: [BuildAndDeployContainerApp]
+     env:
+      IMAGE_TAG: ${{needs.BuildAndDeployContainerApp.outputs.imageTag}}
+     environment: test
+     runs-on: ubuntu-latest
+     steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      # Deploy the container app to the test environment using the imageToDeploy from the previous job
+      - name: Container App deploy
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          acrName: ${{ secrets.CONTAINER_REGISTRY_NAME }}
+          imageToDeploy: devaiplatformcr.azurecr.io/dev-ai-platform-api:${{ env.BRANCH_NAME }}-${{ env.IMAGE_TAG }}
+          containerAppName: ${{ secrets.CONTAINER_APP_NAME }}
+          containerAppEnvironment: ${{ secrets.CONTAINER_APP_ENVIRONMENT_NAME }}
+          resourceGroup: ${{ secrets.RESOURCE_GROUP }}
