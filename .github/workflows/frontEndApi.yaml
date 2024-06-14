@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'src/dotnet/**'      
   # Add workflow dispatch event to trigger the workflow manually to all 
   workflow_dispatch: 
 env:
