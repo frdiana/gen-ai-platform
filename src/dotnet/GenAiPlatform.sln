@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.34929.205
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontendApi", "frontendApi", "{181AE894-76EC-4FC7-9714-FE13AC254B5F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenAiPlatform.FrontendApi", "frontendApi\GenAiPlatform.FrontendApi.csproj", "{6E90BEBD-F2CC-41D8-924D-A3942F3B256B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E90BEBD-F2CC-41D8-924D-A3942F3B256B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E90BEBD-F2CC-41D8-924D-A3942F3B256B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E90BEBD-F2CC-41D8-924D-A3942F3B256B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E90BEBD-F2CC-41D8-924D-A3942F3B256B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6E90BEBD-F2CC-41D8-924D-A3942F3B256B} = {181AE894-76EC-4FC7-9714-FE13AC254B5F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {164A7A4B-6CD8-48FB-93B2-FE37B1F5AC2D}
+	EndGlobalSection
+EndGlobal

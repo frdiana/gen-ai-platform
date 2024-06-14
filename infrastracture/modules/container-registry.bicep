@@ -1,22 +1,21 @@
-@minLength(5)
-@maxLength(50)
-@description('Provide a globally unique name of your Azure Container Registry. Alphanumeric only')
+/*
+  Parameters
+*/
 param containerRegistryName string
-
-@description('Provide a location for the registry.')
-param location string = resourceGroup().location
-
-@description('Provide a tier of your Azure Container Registry.')
 param acrSku string = 'Standard'
-
-@description('The tags to be assigned to the created resources.')
+param containerRegistryUserAssignedIdentityName string
 param tags object = {}
-
+/*
+  Variables
+*/
 var containerRegistryPullRoleGuid='7f951dda-4ed3-4680-a7ca-43fe172d538d'
 
+// ---------------------------------------------------------------------
+// Container Registry
+// --------------------------------------------------------------------- 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
   name: containerRegistryName
-  location: location
+  location: resourceGroup().location
   sku: {
     name: acrSku
   }
@@ -24,14 +23,18 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' =
     adminUserEnabled: false
   }
 }
-
+// ---------------------------------------------------------------------
+// User Assigned Identity
+// --------------------------------------------------------------------- 
 resource containerRegistryUserAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
-  name: 'aca-user-identity-${uniqueString(resourceGroup().id)}'
-  location: location
+  name: containerRegistryUserAssignedIdentityName
+  location: resourceGroup().location
   tags: tags
 }
-
-resource containerRegistryPullRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = if(!empty(containerRegistryName)) {
+// ---------------------------------------------------------------------
+// Role Assignment
+// --------------------------------------------------------------------- 
+resource containerRegistryPullRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(subscription().id, containerRegistry.id, containerRegistryUserAssignedIdentity.id) 
   scope: containerRegistry
   properties: {
@@ -41,5 +44,4 @@ resource containerRegistryPullRoleAssignment 'Microsoft.Authorization/roleAssign
   }
 }
 
-@description('Output the login server property for later use')
 output loginServer string = containerRegistry.properties.loginServer
