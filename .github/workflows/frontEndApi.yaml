@@ -20,6 +20,7 @@ jobs:
     outputs:
       imageTag: ${{ steps.current-time.outputs.formattedTime }}
     steps:
+    
     - name: Get current time
       uses: josStorer/get-current-time@v2
       id: current-time
@@ -36,6 +37,12 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Azure CLI Action
+      uses: Azure/cli@v2.0.0
+      with:
+        # Specify the script here
+        inlineScript: 
+         az acr update -n ${{ secrets.CONTAINER_REGISTRY_NAME }} --admin-enabled true          
     - name: Container App deploy
       uses: azure/container-apps-deploy-action@v1
       with:
@@ -46,3 +53,9 @@ jobs:
         containerAppEnvironment: ${{ secrets.CONTAINER_APP_ENVIRONMENT_NAME }}
         resourceGroup: ${{ secrets.RESOURCE_GROUP }}
         targetPort: 8080
+    - name: Azure CLI Action
+      uses: Azure/cli@v2.0.0
+      with:
+        # Specify the script here
+        inlineScript: 
+         az acr update -n ${{ secrets.CONTAINER_REGISTRY_NAME }} --admin-enabled false
