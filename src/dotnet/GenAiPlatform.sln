@@ -7,6 +7,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontendApi", "frontendApi"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenAiPlatform.FrontendApi", "frontendApi\GenAiPlatform.FrontendApi.csproj", "{6E90BEBD-F2CC-41D8-924D-A3942F3B256B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenAiPlatformSummarizationApi", "summarization\GenAiPlatformSummarizationApi\GenAiPlatformSummarizationApi.csproj", "{42539741-2941-4132-8203-E8AA2734ADFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "summarization", "summarization", "{16E43571-F02C-416B-85C3-108F7FC2CF8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "translation", "translation", "{5BAA7ED7-7283-47DA-8BDF-65391111FEDC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenAiPlatform.Translation", "translation\GenAiPlatform.Translation\GenAiPlatform.Translation.csproj", "{D97281C3-8D0C-4526-BDB3-0B13F8365E18}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3B1BD5BC-42BE-4B4C-AD9D-AC8E7D0D0748}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +27,26 @@ Global
 		{6E90BEBD-F2CC-41D8-924D-A3942F3B256B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E90BEBD-F2CC-41D8-924D-A3942F3B256B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E90BEBD-F2CC-41D8-924D-A3942F3B256B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42539741-2941-4132-8203-E8AA2734ADFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42539741-2941-4132-8203-E8AA2734ADFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42539741-2941-4132-8203-E8AA2734ADFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42539741-2941-4132-8203-E8AA2734ADFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D97281C3-8D0C-4526-BDB3-0B13F8365E18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D97281C3-8D0C-4526-BDB3-0B13F8365E18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D97281C3-8D0C-4526-BDB3-0B13F8365E18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D97281C3-8D0C-4526-BDB3-0B13F8365E18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B1BD5BC-42BE-4B4C-AD9D-AC8E7D0D0748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B1BD5BC-42BE-4B4C-AD9D-AC8E7D0D0748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B1BD5BC-42BE-4B4C-AD9D-AC8E7D0D0748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B1BD5BC-42BE-4B4C-AD9D-AC8E7D0D0748}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6E90BEBD-F2CC-41D8-924D-A3942F3B256B} = {181AE894-76EC-4FC7-9714-FE13AC254B5F}
+		{42539741-2941-4132-8203-E8AA2734ADFA} = {16E43571-F02C-416B-85C3-108F7FC2CF8D}
+		{D97281C3-8D0C-4526-BDB3-0B13F8365E18} = {5BAA7ED7-7283-47DA-8BDF-65391111FEDC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {164A7A4B-6CD8-48FB-93B2-FE37B1F5AC2D}

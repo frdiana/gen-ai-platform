@@ -1,0 +1,14 @@
+@GenAiPlatformSummarizationApi_HostAddress = http://localhost:9600
+
+GET {{GenAiPlatformSummarizationApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{GenAiPlatformSummarizationApi_HostAddress}}/summarization?text=string
+
+###
+
+GET {{GenAiPlatformSummarizationApi_HostAddress}}/summarization/summarize
+
+###

@@ -1,10 +1,8 @@
-@GenAiPlatform.FrontendApi_HostAddress = http://localhost:5173
-
-GET {{GenAiPlatform.FrontendApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
-
-GET {{GenAiPlatform.FrontendApi_HostAddress}}/api/health
+@hostAddress = http://localhost:9500
+// /summarization
+GET {{hostAddress}}/summarization/summarize
 
 ###
+
+// /translation
+POST {{hostAddress}}/Translation?from=ddd&to=ddd
